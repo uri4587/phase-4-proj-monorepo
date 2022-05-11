@@ -14,6 +14,8 @@ function App() {
   }
   useEffect(fetchData, [])
 
+  console.log(tasks)
+
   return (
     <>
     <Header/>

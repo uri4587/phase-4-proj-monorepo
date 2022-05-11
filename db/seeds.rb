@@ -17,4 +17,7 @@ family = Category.create(name: "Family")
 important = Category.create(name: "SUPER IMPORTANT!!!!!")
 
 task1 = Task.create(text: "Take out garbage", date_to_complete: Date.today, user_id: user1.id, category_id: chores.id)
-task2 = Task.create(text: "File Taxes", date_to_complete: Date.today, user_id: user1.id, category_id: important.id)
+task2 = Task.create(text: "File Taxes", date_to_complete: Date.tomorrow, user_id: user1.id, category_id: important.id)
+task3 = Task.create(text: "do dishes", date_to_complete: Date.today + 2, user_id: user1.id, category_id: chores.id)
+task4 = Task.create(text: "go to gym", date_to_complete: Date.today + 5, user_id: user1.id, category_id: fun.id)
+task5 = Task.create(text: "family dinner", date_to_complete: Date.today + 3, user_id: user1.id, category_id: family.id)

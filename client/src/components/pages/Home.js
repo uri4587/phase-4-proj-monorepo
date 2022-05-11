@@ -13,7 +13,7 @@ function Home({tasks, setTasks}) {
     // }
 
     function taskMapper(task) {
-        return <TodoCards key={task.id} task={task}/>
+        return <TodoCards key={task.id} task={task} tasks={tasks} setTasks={setTasks}/>
     }
   return (
 
@@ -23,7 +23,9 @@ function Home({tasks, setTasks}) {
             <br></br>
         </div>
         <div className="card-container">
-            {tasks.map(taskMapper)}
+            <div className="row">
+                {tasks.map(taskMapper)}
+            </div>
         </div>
     </div>
   )
