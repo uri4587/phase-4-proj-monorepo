@@ -4,7 +4,7 @@ import TodoCards from './TodoCards'
 
 function Home({tasks, setTasks}) {
 
-    console.log(tasks)
+    // console.log(tasks)
    
     // const mappingTasks = () => {
     //     tasks.map((task) => { 

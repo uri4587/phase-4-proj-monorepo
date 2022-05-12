@@ -70,13 +70,13 @@ input[type=text]:focus {
 .card-container {
   box-sizing: border-box;
   position: absolute;
-  left: 250px
+  left: 200px
   
 }/* Float four columns side by side */
 .column {
   float: left;
-  width: 25%;
-  padding: 0 10px;
+  width: 30%;
+  padding: 10px;
 }
 
 /* Remove extra left and right margins, due to padding in columns */

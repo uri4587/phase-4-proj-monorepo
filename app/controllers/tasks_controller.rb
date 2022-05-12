@@ -13,15 +13,26 @@ class TasksController < ApplicationController
     end
 
     def create
+       
+        category = Category.find_by_name(params[:category][:name])
+        params[:category_id] = category.id
+        params[:user_id] = User.first.id
+        task = Task.create(task_params)
         byebug
-        task = Task.create!(task_params)
         render json: task, status: :ok
     end
 
     def destroy
         task = Task.find(params[:id])
         task.destroy
-        head :no_content
+        # head :no_content
+        render json: task
+    end
+
+    def update
+        task = Task.find(params[:id])
+        task.update(task_params)
+        render json: task
     end
 
 private

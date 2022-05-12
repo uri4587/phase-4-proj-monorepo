@@ -14,7 +14,7 @@ function App() {
   }
   useEffect(fetchData, [])
 
-  console.log(tasks)
+  // console.log(tasks)
 
   return (
     <>
