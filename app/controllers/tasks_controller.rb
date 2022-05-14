@@ -13,12 +13,10 @@ class TasksController < ApplicationController
     end
 
     def create
-       
         category = Category.find_by_name(params[:category][:name])
         params[:category_id] = category.id
-        params[:user_id] = User.first.id
-        task = Task.create(task_params)
-        byebug
+        # params[:user_id] = User.second.id
+        task = Task.create!(task_params)
         render json: task, status: :ok
     end
 
@@ -30,6 +28,8 @@ class TasksController < ApplicationController
     end
 
     def update
+        category = Category.find_by_name(params[:category][:name])
+        params[:category_id] = category.id
         task = Task.find(params[:id])
         task.update(task_params)
         render json: task

@@ -1,0 +1,12 @@
+{
+    "name": "phase-4-monorepo",
+    "description": "Project Outer package.json - Will inclde Heroku scripts at Deployment",
+
+    "engines": {"node": "16.x"},
+    "scripts": {
+        "start": "npm start --prefix client"
+    }
+
+
+
+}

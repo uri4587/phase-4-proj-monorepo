@@ -5,6 +5,10 @@ import {useState, useEffect} from 'react';
 function TodoCards({task, tasks, setTasks}) {
   const [showEditForm, setShowEditForm] = useState(false)
   const [changedTask, setChangedTask] = useState({text: "", date_to_complete: "", category: {name: ""}, completed: false})
+  const [showCompleted, setShowCompleted] = useState(false)
+
+  console.log(task)
+
 
   const setTaskOnArrival = () => {
     if(task) {
@@ -17,11 +21,9 @@ function TodoCards({task, tasks, setTasks}) {
 
   
 
-console.log(changedTask)
+// console.log(changedTask)
 
-const handleCheckbox = (e) => {
-    setChangedTask({...changedTask, completed: e.target.value})
-}
+
 
 
 const handleDelete = (deletedTask) => {
@@ -66,15 +68,23 @@ const handleTaskPatch = () => {
   headers: {'Content-Type': 'application/json'},
   body: JSON.stringify(changedTask)})
   .then(resp => resp.json())
-  .then(tasks => {console.log(tasks)
-    tasks.find((eachTask)=> {
-      if(eachTask.id == changedTask.id) {
-                eachTask = changedTask
+  .then(updatedTask => {console.log(updatedTask)
+    const updateTaskToMap = tasks.map((eachTask)=> {
+      if(eachTask.id == updatedTask.id) {
+                return updatedTask
               }
+      else {
+        return eachTask
+      }
     })
-
+    setTasks(updateTaskToMap)
 })}
+const handleCompleteChange = (e) => {
+  {setShowCompleted(!showCompleted)}
+  setChangedTask({...changedTask, completed: showCompleted})
 
+  handleTaskPatch(changedTask, task.id)
+}
 const handleTextChange = (e) => {
   setChangedTask({...changedTask, text: e.target.value})
 }
@@ -104,11 +114,7 @@ const handleTaskEditSubmit = (e) => {
           <br></br>
           {`Date to Complete Task: ${dateFormat(task.date_to_complete, "dddd, mmmm dS, yyyy")}`}
           <br></br>
-          <p>
-              <label htmlFor="completed?">Completed?</label>
-              <input onClick={handleCheckbox}type="checkbox" value={task.completed} />
-              {task.completed ? <h2>Completed Task!</h2> : <h2>Not Yet Completed</h2>}
-          </p>
+          {showCompleted ? <button onClick={handleCompleteChange} >Completed Task!</button> : <button onClick={handleCompleteChange} >Not Yet Completed Task</button>}
           <br></br>
           <button onClick={(e) => handleDelete(task)}>Delete</button>
           <button onClick={(e) => {setShowEditForm(!showEditForm)}} >Edit</button>
@@ -127,7 +133,7 @@ const handleTaskEditSubmit = (e) => {
                 <option value="SUPER IMPORTANT!!!!!">Important</option>
               </select>
               <br></br>
-              <button  >Submit</button>
+              <button>Submit</button>
             </form>
 
           ) : null }

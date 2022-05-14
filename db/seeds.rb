@@ -8,7 +8,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-user1 = User.create(name: "Joe")
+user1 = User.create(name: "Joe",username: "jman2022",email: "jman2022@gmail.com", password: "123")
 
 chores = Category.create(name: "Chores")
 work = Category.create(name: "Work")

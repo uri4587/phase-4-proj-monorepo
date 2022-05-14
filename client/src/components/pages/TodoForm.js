@@ -1,8 +1,9 @@
 import {useState} from 'react'
 
-function TodoForm({tasks, setTasks}) {
-    const [newTask, setNewTask] = useState({text: "", date_to_complete: "", category: {name: ""}})
+function TodoForm({tasks, setTasks, currentUser}) {
+    const [newTask, setNewTask] = useState({user_id: currentUser.id,text: "", date_to_complete: "", category: {name: ""}})
 
+    console.log(tasks)
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -12,7 +13,9 @@ function TodoForm({tasks, setTasks}) {
             body: JSON.stringify(newTask)
         })
         .then(resp => resp.json())
-        .then(newTask => {setTasks([newTask, ...tasks])})
+        .then(newTask => {
+
+            setTasks([newTask, ...tasks])})
     }
 
     const handleTextChange = (e) => {

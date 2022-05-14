@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: phase_4_proj_monorepo_production
+  database: phase_4_proj_monorepo_production_5_12_2022_0217PM_production
   username: phase_4_proj_monorepo
   password: <%= ENV["PHASE_4_PROJ_MONOREPO_DATABASE_PASSWORD"] %>

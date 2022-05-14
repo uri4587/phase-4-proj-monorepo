@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
 private
     def user_params
-        params.permit(:name)
+        params.permit(:name, :email, :password, :username)
     end
     def render_invalid_record_response(invalid)
         render json: {errors: [invalid.record.errors]}, status: :unprocessable_entity
