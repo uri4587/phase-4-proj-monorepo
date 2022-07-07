@@ -1,8 +1,10 @@
-import React from 'react'
 import TodoForm from './TodoForm'
 import TodoCards from './TodoCards'
+import Login from './Login'
+import {useNavigate as navigate} from 'react-router-dom'
 
 function Home({tasks, setTasks, isLogin, currentUser}) {
+    
 
     // console.log(tasks)
    
@@ -20,7 +22,9 @@ function Home({tasks, setTasks, isLogin, currentUser}) {
 
   return (
     <>
-    {isLogin ?  <div className="page-container">
+    <br></br><br></br><br></br>
+    {isLogin ?  
+        <div className="page-container">
             <div className="todo-form">
                 <TodoForm tasks={tasks} setTasks={setTasks} currentUser={currentUser}/>
                 <br></br>
@@ -33,8 +37,7 @@ function Home({tasks, setTasks, isLogin, currentUser}) {
         </div> 
 
         : 
-        <div className="welcome-page-container">
-        </div>
+        <Login />
   }
     </>
   )

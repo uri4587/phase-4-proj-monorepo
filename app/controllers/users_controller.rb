@@ -28,7 +28,7 @@ private
         params.permit(:name, :email, :password, :username)
     end
     def render_invalid_record_response(invalid)
-        render json: {errors: [invalid.record.errors]}, status: :unprocessable_entity
+        render json: {errors: [invalid.record.errors.full_messages]}, status: :unprocessable_entity
     end
 
     def render_record_not_found_response(invalid)

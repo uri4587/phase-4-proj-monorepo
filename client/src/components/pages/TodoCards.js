@@ -5,10 +5,12 @@ import {useState, useEffect} from 'react';
 function TodoCards({task, tasks, setTasks}) {
   const [showEditForm, setShowEditForm] = useState(false)
   const [changedTask, setChangedTask] = useState({text: "", date_to_complete: "", category: {name: ""}, completed: false})
-  const [showCompleted, setShowCompleted] = useState(false)
+  const [showCompleted, setShowCompleted] = useState(task.completed)
+  const [date, setDate] = useState("")
 
-  console.log(task)
-
+  const dateComplete = task.date_to_complete.slice(0, 10)
+  console.log(dateComplete)
+  const newDate = dateComplete.replaceAll('-', '/')
 
   const setTaskOnArrival = () => {
     if(task) {
@@ -108,22 +110,79 @@ const handleTaskEditSubmit = (e) => {
   return (
     <div className="column">
         <div className="todo-cards">
-          {`Task: ${task.text}`}
+        <span 
+            style={{marginRight: '375px', marginBottom: '9px'}}
+            className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700"
+          >
+            Delete
+            <button
+              onClick={(e) => handleDelete(task)}
+              type="button"
+              className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+            >
+              <span className="sr-only">Remove large option</span>
+              <svg className="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
+              </svg>
+            </button>
+          </span>
           <br></br>
-          {`Category: ${task.category.name}`}
+          <ul className="bg-white shadow overflow-hidden px-4 py-4 sm:px-6 sm:rounded-md">
+            {`Task: ${task.text}`}
+            
+          </ul>
+            <br></br>
+          <ul className="bg-white shadow overflow-hidden px-4 py-4 sm:px-6 sm:rounded-md">
+            {`Category: ${task.category.name}`}
+          </ul>
+            <br></br>
+          <ul className="bg-white shadow overflow-hidden px-4 py-4 sm:px-6 sm:rounded-md">
+          {`Date to Complete Task: ${dateFormat(newDate , "dddd, mmmm d, yyyy ")}`}
+          {/* { `Date to Complete Task: ${task.date_to_complete}` } */}
+          </ul>
           <br></br>
-          {`Date to Complete Task: ${dateFormat(task.date_to_complete, "dddd, mmmm dS, yyyy")}`}
+          {!showCompleted ? 
+            <button
+              style={{marginBottom: '10px'}}
+              onClick={handleCompleteChange}
+              className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800"
+            >
+              Not Yet Completed Task
+            </button>
+            :
+            <button
+              style={{marginBottom: '10px'}}
+              onClick={handleCompleteChange} 
+              className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
+              >
+              Completed Task!
+            </button>
+            }
           <br></br>
-          {showCompleted ? <button onClick={handleCompleteChange} >Completed Task!</button> : <button onClick={handleCompleteChange} >Not Yet Completed Task</button>}
-          <br></br>
-          <button onClick={(e) => handleDelete(task)}>Delete</button>
-          <button onClick={(e) => {setShowEditForm(!showEditForm)}} >Edit</button>
+          { showEditForm ? 
+          <button 
+            type="button"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+            onClick={(e) => {setShowEditForm(!showEditForm)}} 
+            >
+            Edit
+          </button>
+          :
+          <button 
+            type="button"
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50"
+            onClick={(e) => {setShowEditForm(!showEditForm)}} 
+          >
+            Edit
+          </button>
+    
+          }
           {showEditForm ? (
             <form onSubmit={handleTaskEditSubmit}>
               <input onChange={handleTextChange} value={changedTask.text} className="text-box" type="text"/>
               <br></br>
-              <input onChange={handleDateChange} value={changedTask.date_to_complete} type="date"/>
-              <br></br>
+              {/* <input onChange={handleDateChange} value={changedTask.date_to_complete} type="date"/>
+              <br></br> */}
               <select onChange={handleSelectChange} value={changedTask.category.name} name="category" id="category">
                 <option value="none" >Select an Option</option>
                 <option value="Chores">Chores</option>

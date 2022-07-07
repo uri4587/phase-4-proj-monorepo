@@ -1,24 +1,5 @@
 class SessionController < ApplicationController
 
-
-    # def create
-
-    #     user_to_find = User.find_by(params[:username])
-
-    #     if user_to_find
-    #         if user_to_find.authenticate(params[:password])
-    #             session[:user_id] = user_to_find.id
-    #             render json: user_to_find, status: :ok
-    #         else  
-    #         render json: {error: "Check Your Password"}
-
-    #         end
-
-    #     else render json: {error: "Username or Password Does Not Match"}
-
-    #     end
-    # end
-
     def login
         user = User.find_by(username: params[:username])
         
