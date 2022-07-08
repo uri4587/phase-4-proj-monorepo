@@ -132,7 +132,7 @@ console.log(errors.map((e)=>{console.log(e)}))
                 </div>
                 {errors ? errors.map((e,index) => <div key={index} className='error-message'>
                     <p className="error">{e[0]}</p>
-                    <p>{e[1]}</p>
+                    <p className="error">{e[1]}</p>
                 </div>):null}
                 <button 
                 type="submit"
